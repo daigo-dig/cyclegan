@@ -19,8 +19,8 @@ import os
 class CycleGAN():
     def __init__(self):
         # Input shape
-        self.img_rows = 128
-        self.img_cols = 128
+        self.img_rows = 256
+        self.img_cols = 256
         self.channels = 1
         self.img_shape = (self.img_rows, self.img_cols,self.channels)
 
@@ -245,7 +245,7 @@ class CycleGAN():
 
         gen_imgs = np.concatenate([imgs_A, fake_B, reconstr_A, imgs_B, fake_A, reconstr_B])
 
-        gen_imgs = np.reshape(gen_imgs,(6,128,128))
+        gen_imgs = np.reshape(gen_imgs,(6,256,256))
 
         # Rescale images 0 - 1
         gen_imgs = 0.5 * gen_imgs + 0.5

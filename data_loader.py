@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 
 class DataLoader():
-    def __init__(self, dataset_name, img_res=(128, 128)):
+    def __init__(self, dataset_name, img_res=(256, 256)):
         self.dataset_name = dataset_name
         self.img_res = img_res
 
@@ -22,7 +22,7 @@ class DataLoader():
                 if np.random.random() > 0.5:
                     img = np.fliplr(img)
             else:
-                img = np.reshape(cv2.resize(img, self.img_res),(128,128,1))
+                img = np.reshape(cv2.resize(img, self.img_res),(256,256,1))
             imgs.append(img)
 
         imgs = np.array(imgs)/127.5 - 1.
@@ -50,8 +50,8 @@ class DataLoader():
                 img_A = self.imread(img_A)
                 img_B = self.imread(img_B)
 
-                img_A = np.reshape(cv2.resize(img_A, self.img_res),(128,128,1))
-                img_B = np.reshape(cv2.resize(img_B, self.img_res),(128,128,1))
+                img_A = np.reshape(cv2.resize(img_A, self.img_res),(256,256,1))
+                img_B = np.reshape(cv2.resize(img_B, self.img_res),(256,256,1))
 
                 if not is_testing and np.random.random() > 0.5:
                         img_A = np.fliplr(img_A)
