@@ -217,9 +217,16 @@ class CycleGAN():
                 if batch_i % sample_interval == 0:
                     self.sample_images(epoch, batch_i)
 
+                if batch_i % (sample_interval*10) == 0:
+                    self.sample_models(epoch, batch_i)
+    def sample_models(self, epoch, batch_i):
+        os.makedirs('saved_model/%s' % self.dataset_name,exist_ok=True)
+        model.save_weights("saved_model/%s/%d_%d.hdf5" % (self.dataset_name, epoch, batch_i))
+        json_string = model.to_json()
+        open("saved_model/%s/%d_%d.json","w").write(json_string)
+
     def sample_images(self, epoch, batch_i):
         os.makedirs('images/%s' % self.dataset_name, exist_ok=True)
-        os.makedirs('saved_model/%s' % self.dataset_name,exist_ok=True)
         r, c = 2, 3
 
         imgs_A = self.data_loader.load_data(domain="A", batch_size=1, is_testing=True)
